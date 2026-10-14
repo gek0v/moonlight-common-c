@@ -1018,6 +1018,17 @@ void LiRequestIdrFrame(void);
 #define LI_FF_CONTROLLER_TOUCH_EVENTS 0x02 // LiSendControllerTouchEvent() supported
 uint32_t LiGetHostFeatureFlags(void);
 
+// Multi-monitor control protocol extension (Sunshine / Moonlight)
+#define CONTROL_MSG_SET_DISPLAY 0x0502
+
+#define DISPLAY_TARGET_P1        0
+#define DISPLAY_TARGET_P2        1
+#define DISPLAY_TARGET_MOSAIC    2
+#define DISPLAY_TARGET_MOSAIC_V  3
+
+// Send display target selection packet (CONTROL_MSG_SET_DISPLAY, 0x0502) to the host
+int LiSendDisplayTarget(uint8_t displayTarget);
+
 #ifdef __cplusplus
 }
 #endif

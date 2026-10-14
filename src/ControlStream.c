@@ -2084,3 +2084,18 @@ bool LiGetHdrMetadata(PSS_HDR_METADATA metadata) {
     *metadata = hdrMetadata;
     return true;
 }
+
+int LiSendDisplayTarget(uint8_t displayTarget) {
+    uint8_t payload = displayTarget;
+
+    if (peer == NULL && ctlSock == INVALID_SOCKET) {
+        return -1;
+    }
+
+    if (sendMessageAndForget(CONTROL_MSG_SET_DISPLAY, sizeof(payload), &payload, 0, ENET_PACKET_FLAG_RELIABLE, false)) {
+        return 0;
+    }
+
+    return -1;
+}
+
